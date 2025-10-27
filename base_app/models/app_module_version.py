@@ -57,8 +57,8 @@ class AppModuleVersion(models.Model):
     )
     version = fields.Selection(
         [
-            ("18.0", "18.0"),
-            ("19.0", "19.0"),
+            ("18", "18"),
+            ("19", "19"),
         ],
         string="Version",
         required=True,
@@ -159,8 +159,7 @@ class AppModuleVersion(models.Model):
     @api.model
     def create_missing_versions(self, version=None):
         """Create missing app.module.version records for all installed modules."""
-        version = version or odoo.release.version.split(".")[0:2]
-        version = ".".join(version)  # e.g. "18.0" or "19.0"
+        version = version or odoo.release.version.split(".")[0] # e.g. "18" or "19"
 
         # 1. Get all installed modules
         installed_modules = self.env["ir.module.module"].search([("state", "=", "installed")])
@@ -170,7 +169,7 @@ class AppModuleVersion(models.Model):
 
         # 2. Get existing versions for these modules (for this version)
         existing_versions = self.search([
-            ("version", "=", version),
+            ("version", "=", str(version)),
             ("module_id", "in", installed_modules.ids),
         ])
 
@@ -184,7 +183,7 @@ class AppModuleVersion(models.Model):
 
         # 4. Bulk create all missing records efficiently
         return self.create([
-            {"module_id": module.id, "version": version}
+            {"module_id": module.id, "version": str(version)}
             for module in missing_modules
         ])
 
