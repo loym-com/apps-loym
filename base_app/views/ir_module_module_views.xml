@@ -29,10 +29,10 @@
         <field name="inherit_id" ref="base.module_tree" />
         <field name="arch" type="xml">
             <list position="inside">
-                <field name="minutes_worked" optional="hide"/>
-                <field name="year_price" optional="hide"/>
-                <field name="minutes_mig_to_next_version" optional="hide"/>
-                <field name="cost_mig_to_next_version" optional="hide"/>
+                <field name="minutes_worked" optional="hide" sum="Total"/>
+                <field name="year_price" optional="hide" sum="Total"/>
+                <field name="minutes_mig_to_next_version" optional="hide" sum="Total"/>
+                <field name="cost_mig_to_next_version" optional="hide" sum="Total"/>
                 <field name="currency_id" invisible="1" />
             </list>
         </field>
