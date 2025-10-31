@@ -30,9 +30,8 @@ class IrModuleModule(models.Model):
         string="Minutes worked",
         related="module_version_ids.minutes_worked",
     )
-    year_price = fields.Monetary(
+    year_price = fields.Float(
         string="Price: minutes*20/100*sqrt(users)",
-        currency_field="currency_id",
         related="module_version_ids.current_price",
         help="Latest valid price per user from the App Price List."
     )
@@ -40,13 +39,13 @@ class IrModuleModule(models.Model):
         string="Migration Work (estimated minutes)",
         related="module_version_ids.minutes_mig_to_next_version",
     )
-    cost_mig_to_next_version = fields.Monetary(
+    cost_mig_to_next_version = fields.Float(
         string="Cost to migrate",
         related="module_version_ids.cost_mig_to_next_version",
     )
-    currency_id = fields.Many2one(
-        "res.currency",
-        string="Currency",
-        required=True,
-        default=lambda self: self.env.company.currency_id.id,
-    )
+    # currency_id = fields.Many2one(
+    #     "res.currency",
+    #     string="Currency",
+    #     required=True,
+    #     default=lambda self: self.env.company.currency_id.id,
+    # )
