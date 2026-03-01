@@ -14,8 +14,9 @@
         'Mathias Markl <mathias.markl@mukit.at>',
     ],
     'depends': [
-        'base_setup',
-        'web_editor',
+        # 'base_setup',
+        # 'web_editor',
+        "web",
     ],
     'data': [
         'views/res_config_settings.xml',
