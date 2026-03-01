@@ -18,24 +18,11 @@
         'web_editor',
     ],
     'data': [
-        'templates/webclient.xml',
         'views/res_config_settings.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [
-            ('prepend', 'web_colors/static/src/scss/colors.scss'),
-            (
-                'before', 
-                'web_colors/static/src/scss/colors.scss', 
-                'web_colors/static/src/scss/colors_light.scss'
-            ),
-        ],
-        'web.assets_web_dark': [
-            (
-                'after', 
-                'web_colors/static/src/scss/colors.scss', 
-                'web_colors/static/src/scss/colors_dark.scss'
-            ),
+            ('prepend', 'web_colors/static/src/scss/colors_light.scss'),
         ],
     },
     'images': [
