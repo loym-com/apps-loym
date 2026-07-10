@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payment_provider_form_nets" model="ir.ui.view">
+        <field name="name">Payment Provider Form - Nets</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position="inside">
+                <group invisible="code != 'nets'">
+                    <field name="nets_environment" required="code == 'nets'"/>
+                    <field
+                        name="nets_api_key"
+                        password="True"
+                        required="code == 'nets' and state != 'disabled'"
+                    />
+                    <field
+                        name="nets_secret_key"
+                        password="True"
+                        required="code == 'nets' and state != 'disabled'"
+                    />
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>
