@@ -13,6 +13,9 @@
         "payment",
     ],
     "data": [
+        "data/payment_method_data.xml",
+        "views/payment_nets_templates.xml",
+        "data/payment_provider_data.xml",
         "security/ir.model.access.csv",
         "views/payment_provider_views.xml",
     ],

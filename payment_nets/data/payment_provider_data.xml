@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="payment_provider_nets" model="payment.provider">
+        <field name="name">Nets</field>
+        <field name="code">nets</field>
+        <field name="module_id" ref="base.module_payment_nets"/>
+        <field name="redirect_form_view_id" ref="payment_nets.redirect_form"/>
+        <field name="payment_method_ids" eval="[Command.set([ref('payment_nets.payment_method_nets')])]"/>
+        <field name="state">disabled</field>
+    </record>
+
+</odoo>

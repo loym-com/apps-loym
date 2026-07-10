@@ -17,6 +17,7 @@ _logger = logging.getLogger(__name__)
 class NetsController(http.Controller):
     """Expose webhook endpoints for Nets callbacks."""
 
+    _return_url = "/payment/nets/return"
     _webhook_url = "/payment/nets/webhook"
 
     @staticmethod
@@ -31,6 +32,14 @@ class NetsController(http.Controller):
             except json.JSONDecodeError:
                 _logger.info("Nets webhook body is not JSON; falling back to form data")
         return dict(post_data)
+
+    @http.route(_return_url, type="http", auth="public", methods=["GET", "POST"],
+               csrf=False, save_session=False)
+    def nets_return(self, **data):
+        """Handle customer redirect back from Nets checkout."""
+        _logger.info("Nets: return from checkout with data: %s", data)
+        request.env["payment.transaction"].sudo()._process("nets", data)
+        return request.redirect("/payment/status")
 
     @http.route(_webhook_url, type="http", auth="public", methods=["POST"], csrf=False)
     def nets_webhook(self, **post_data):
@@ -48,7 +57,7 @@ class NetsController(http.Controller):
             return Response("Missing transaction identifiers", status=400)
 
         try:
-            request.env["payment.transaction"].sudo()._handle_notification_data("nets", notification_data)
+            request.env["payment.transaction"].sudo()._process("nets", notification_data)
         except ValidationError:
             # Acknowledge on validation issues to avoid provider retries flooding logs.
             _logger.exception("Nets: failed to process webhook notification")

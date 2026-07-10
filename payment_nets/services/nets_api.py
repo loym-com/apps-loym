@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-import base64
 import json
+from urllib.error import HTTPError, URLError
 from urllib import request as urlrequest
 
 
@@ -68,19 +68,34 @@ class NetsAPI:
         url = f"{self.base_url}{endpoint}"
         body = None if payload is None else json.dumps(payload).encode()
 
-        api_token = f"{self.api_key}:{self.secret_key}".encode()
-        auth_header = base64.b64encode(api_token).decode()
+        # Nets Easy expects the secret key directly in the Authorization header.
+        # The checkout key can be passed separately to support broader endpoint compatibility.
+        headers = {
+            "Authorization": self.secret_key,
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        }
+        if self.api_key:
+            headers["Checkout-Key"] = self.api_key
+
         req = urlrequest.Request(
             url=url,
             data=body,
             method=method,
-            headers={
-                "Authorization": f"Basic {auth_header}",
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            },
+            headers=headers,
         )
-        with urlrequest.urlopen(req, timeout=30) as response:
-            response_payload = response.read().decode() or "{}"
+        try:
+            with urlrequest.urlopen(req, timeout=30) as response:
+                response_payload = response.read().decode() or "{}"
+        except HTTPError as err:
+            error_payload = err.read().decode() if err.fp else ""
+            if error_payload:
+                raise RuntimeError(
+                    f"Nets API HTTP {err.code} {err.reason}: {error_payload}"
+                ) from err
+            raise RuntimeError(f"Nets API HTTP {err.code} {err.reason}") from err
+        except URLError as err:
+            raise RuntimeError(f"Nets API connection error: {err.reason}") from err
+
         parsed = json.loads(response_payload)
         return parsed if isinstance(parsed, dict) else {}
