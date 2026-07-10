@@ -10,7 +10,7 @@
         with time based versions.
     """,
     "license": "LGPL-3",
-    "author": "Nimarosa, Henrik Norlin, Odoo Community Association (OCA)",
+    "author": "Nimarosa, Loym, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/server-tools",
     "maintainers": ["norlinhenrik", "nimarosa"],
     "category": "Technical",

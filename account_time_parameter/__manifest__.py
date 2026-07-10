@@ -4,7 +4,7 @@
 {
     "name": "account_time_parameter",
     "summary": "",
-    "author": "Ows, Odoo Community Association (OCA)",
+    "author": "Loym, Odoo Community Association (OCA)",
     "category": "Accounting",
     "data": [
         "views/base_time_parameter_views.xml",
