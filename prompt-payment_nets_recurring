@@ -1,0 +1,137 @@
+Create an Odoo 19.0 Community addon named `payment_nets_recurring`.
+
+This module extends an existing addon:
+
+- payment_nets
+
+Goal:
+Add Nets Recurring Payments support using Odoo's standard payment.token framework.
+
+Important architecture:
+
+- Odoo subscription models remain responsible for recurring billing.
+- Nets only stores the payment agreement/token and performs future charges.
+- Do not create a subscription model.
+- Do not duplicate subscription logic.
+
+Dependencies:
+
+- payment
+- payment_nets
+
+
+Create:
+
+payment_nets_recurring/
+├── __init__.py
+├── __manifest__.py
+├── models/
+│   ├── __init__.py
+│   ├── payment_transaction.py
+│   ├── payment_token.py
+│   └── payment_provider.py
+├── services/
+│   ├── __init__.py
+│   └── nets_recurring_api.py
+├── views/
+│   └── payment_provider_views.xml
+├── security/
+│   └── ir.model.access.csv
+└── README.md
+
+
+Implement:
+
+1. Extend payment.provider
+
+Add:
+
+- support for recurring payments
+- boolean field:
+
+nets_support_recurring = True
+
+
+2. Extend payment.transaction
+
+When tokenization is requested:
+
+- create Nets recurring agreement during first payment
+- process recurring agreement ID from Nets response
+- create payment.token
+
+
+Example:
+
+payment.token:
+
+provider_id:
+    Nets
+
+provider_ref:
+    Nets recurring agreement ID
+
+
+3. Extend payment.token
+
+Implement:
+
+charge(amount, currency)
+
+The method must:
+
+- call Nets recurring charge API
+- use provider_ref as agreement ID
+- return payment result
+
+
+4. Nets recurring API service
+
+Create:
+
+services/nets_recurring_api.py
+
+Implement:
+
+create_recurring_agreement()
+
+charge_recurring_agreement()
+
+cancel_recurring_agreement()
+
+
+Keep all API communication isolated.
+
+
+5. Webhooks
+
+Support:
+
+- first recurring agreement creation
+- recurring payment success
+- recurring payment failure
+- agreement cancellation
+
+
+6. Security
+
+Never store:
+
+- card number
+- expiry date
+- CVV
+
+Only store Nets references/tokens.
+
+
+7. Tests
+
+Create tests for:
+
+- token creation
+- recurring agreement handling
+- recurring charge success
+- recurring charge failure
+
+
+Follow Odoo 19 payment framework conventions.

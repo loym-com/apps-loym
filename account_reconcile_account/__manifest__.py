@@ -1,0 +1,22 @@
+# Copyright 2022-2023 Ows - Henrik Norlin
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+{
+    "name": "Account Reconciliation Account",
+    "summary": "",
+    "author": "Loym,Odoo Community Association (OCA)",
+    "category": "account",
+    "data": [
+        # "views/account_bank_statement_views.xml",
+        # "views/account_reconcile_model_views.xml",
+    ],
+    "depends": [
+        "account",
+        # "account_reconcile_oca",
+        "account_time_parameter",
+    ],
+    "license": "AGPL-3",
+    "maintainers": ["ows-cloud"],
+    "version": "19.0.1.0.0",
+    "website": "https://github.com/OCA",
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_bank_statement_form" model="ir.ui.view">
+        <field name="name">account.bank.statement.line.view.list.inherit</field>
+        <field name="model">account.bank.statement.line</field>
+        <field
+            name="inherit_id"
+            ref="account_statement_base.account_bank_statement_line_list"
+        />
+        <field name="arch" type="xml">
+            <list position="inside">
+                <field name="account_id" optional="hide" />
+            </list>
+        </field>
+    </record>
+</odoo>

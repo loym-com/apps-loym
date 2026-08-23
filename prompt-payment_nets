@@ -1,0 +1,114 @@
+Create an Odoo 19.0 Community addon named `payment_nets`.
+
+Goal:
+Implement Nets Easy as a standard Odoo payment provider using the Odoo payment framework.
+
+Architecture:
+- Follow the same patterns as Odoo official payment providers like payment_stripe and payment_adyen.
+- Do not create custom payment logic outside the Odoo payment framework.
+- This module must only handle payment processing. Do not implement subscriptions or recurring payments here.
+
+Dependencies:
+- payment
+
+Create this structure:
+
+payment_nets/
+├── __init__.py
+├── __manifest__.py
+├── models/
+│   ├── __init__.py
+│   ├── payment_provider.py
+│   └── payment_transaction.py
+├── controllers/
+│   ├── __init__.py
+│   └── main.py
+├── services/
+│   ├── __init__.py
+│   └── nets_api.py
+├── views/
+│   └── payment_provider_views.xml
+├── security/
+│   └── ir.model.access.csv
+└── README.md
+
+
+Implement:
+
+1. payment.provider extension
+
+Add:
+
+- provider code: `nets`
+
+Configuration fields:
+
+- nets_api_key
+- nets_secret_key
+- nets_environment:
+    - test
+    - production
+
+
+2. Payment transaction flow
+
+Implement the standard methods:
+
+- _get_specific_rendering_values()
+- _get_tx_from_notification_data()
+- _process_notification_data()
+
+Support:
+
+- creating a payment request
+- redirecting customer to Nets checkout
+- receiving webhook callbacks
+- updating transaction status
+
+
+3. Create a service class:
+
+services/nets_api.py
+
+The API client must be isolated from Odoo models.
+
+Example:
+
+class NetsAPI:
+    def create_payment(...)
+    def get_payment(...)
+    def refund_payment(...)
+
+
+Use placeholders for actual Nets endpoints if needed, but structure the code for real API integration.
+
+
+4. Controllers
+
+Create webhook endpoint:
+
+/payment/nets/webhook
+
+The controller should:
+
+- validate incoming data
+- locate payment.transaction
+- call _handle_notification_data()
+
+
+5. Tests
+
+Create Odoo tests:
+
+- provider installation
+- transaction creation
+- webhook processing with mocked Nets responses
+
+
+Requirements:
+
+- Odoo 19.0 style
+- clean Python
+- no deprecated APIs
+- include README
+- module must install successfully

@@ -1,0 +1,1 @@
+from . import l10n_no_import_vipps
