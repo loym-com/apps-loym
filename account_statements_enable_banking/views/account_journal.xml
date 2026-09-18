@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record model="ir.ui.view" id="view_account_journal_form_enable_banking">
+        <field name="name">account.journal.form.enable.banking</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+
+             <xpath expr="//div[@name='button_box']" position="inside">
+                 <button class="oe_stat_button" icon="fa-arrow-down"
+                         type="action"
+                         name="%(action_enable_banking_fetch_wizard)d"
+                         invisible="bank_statements_source != 'enable_banking'"
+                         groups="account.group_account_user"
+                 >
+                     <div class="o_stat_info">
+                         <span class="o_stat_text">Fetch Transactions</span>
+                     </div>
+                 </button>
+             </xpath>
+
+
+            <xpath expr="//group[@name='bank_account_number']" position="after">
+                <group name="enable_banking_configuration" string="Enable Banking" invisible="bank_statements_source != 'enable_banking'">
+
+                    <field name="enable_banking_config" string="Configuration" options="{'no_create': True}"/>
+                    <field name="enable_banking_status" widget="badge"
+                           decoration-warning="enable_banking_status == 'not_connected'"
+                           decoration-success="enable_banking_status == 'connected'"
+                           decoration-danger="enable_banking_status in ['expired', 'error']"
+                    />
+                    <field name="enable_banking_valid_until" widget="remaining_days" invisible="enable_banking_status != 'connected'"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

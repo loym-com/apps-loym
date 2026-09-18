@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record model="ir.ui.view" id="view_enable_banking_config_form_connect">
+        <field name="name">enable.banking.config.form.connect</field>
+        <field name="model">enable.banking.config</field>
+        <field name="arch" type="xml">
+            <form string="Connect Enable Banking">
+                <sheet>
+                    <group>
+                        <field name="redirect_url" widget="CopyClipboardChar"/>
+                        <field name="application_id"/>
+                        <field name="rsa_key_filename" invisible="1"/>
+                        <field name="rsa_key" widget="binary" filename="rsa_key_filename"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_connect" string="Connect" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_enable_banking_config_form">
+        <field name="name">enable.banking.config.form</field>
+        <field name="model">enable.banking.config</field>
+        <field name="arch" type="xml">
+            <form string="Connect Enable Banking">
+                <field name="active" invisible="1"/>
+                <header>
+                    <button type="action" name="%(action_enable_banking_fetch_wizard)d" class="oe_highlight"
+                          invisible="not active or not connection_status == 'connected'" string="Fetch Transactions"/>
+                    <button name="action_connect" string="Connect" type="object" class="oe_highlight"
+                            invisible="auth_code"/>
+                    <button name="action_connect" string="Reconnect" type="object" invisible="not auth_code"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="bank_id" readonly="journal_ids"/>
+                            <field name="application_id"/>
+                            <field name="rsa_key_filename" invisible="1"/>
+                            <field name="rsa_key" widget="binary" filename="rsa_key_filename"/>
+                            <field name="account_type" widget="radio" options="{'horizontal': True}"/>
+                        </group>
+                        <group>
+                            <field name="redirect_url" widget="CopyClipboardChar"/>
+                            <field name="connection_status" widget="badge"
+                                   decoration-warning="connection_status == 'not_connected'"
+                                   decoration-success="connection_status == 'connected'"
+                                   decoration-danger="connection_status in ['expired', 'error']"
+                            />
+
+                            <field name="auth_code" invisible="1"/>
+                            <field name="valid_until" widget="remaining_days" invisible="not auth_code"/>
+
+                            <field name="cron_id" invisible="not auth_code" />
+                            <field name="cron_active" widget="boolean_toggle" invisible="not auth_code" readonly="not auth_code"/>
+                            <field name="statement_type" invisible="not auth_code" readonly="not auth_code"/>
+                            <field name="cron_nextcall" invisible="not auth_code" readonly="not auth_code"/>
+                            <field name="last_fetch" invisible="not auth_code" />
+
+
+                        </group>
+
+
+                    </group>
+                    <notebook>
+                        <page string="Journals">
+                            <field name="journal_ids">
+                                <list create="0" edit="0" delete="0">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="bank_account_id"/>
+                                    <field name="currency_id"/>
+                                    <field name="enable_banking_status" widget="badge"
+                                           decoration-warning="enable_banking_status == 'not_connected'"
+                                           decoration-success="enable_banking_status == 'connected'"
+                                           decoration-danger="enable_banking_status in ['expired', 'error']"
+                                           column_invisible="not parent.connection_status == 'connected'" />
+                                    <button name="action_enable_banking_connect" string="Connect" type="object" invisible="not enable_banking_status == 'not_connected' or not parent.connection_status == 'connected' "/>
+                                </list>
+                            </field>
+
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <chatter/>
+
+            </form>
+        </field>
+    </record>
+
+
+       <record id="enable_banking_config_action" model="ir.actions.act_window">
+            <field name="name">Enable Banking Config</field>
+            <field name="res_model">enable.banking.config</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+
+    <menuitem
+            name="Enable Banking Configs"
+            id="enable_banking_config_menu"
+            action="enable_banking_config_action"
+            parent="account.account_account_menu"
+            sequence="100"
+    />
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record model="ir.ui.view" id="account_journal_dashboard_kanban_view_enable_banking">
+        <field name="name">account.journal.dashboard.kanban.enable.banking</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban/field[@name='alias_domain_id']" position="after">
+                <field name="bank_statements_source" />
+                <field name="enable_banking_valid_until" />
+                <field name="enable_banking_status" />
+            </xpath>
+            <xpath expr="//div[@id='dashboard_bank_cash_left']" position="inside">
+                <t t-if="record.bank_statements_source.raw_value == 'enable_banking'">
+                    <t t-if="record.enable_banking_status.raw_value == 'connected' ">
+                        <a
+                        type="action"
+                        name="%(account_statements_enable_banking.action_enable_banking_fetch_wizard)d"
+                        string="Fetch Transactions"
+                        groups="account.group_account_user"
+                        />
+                        <div class="d-flex align-items-center" style="white-space: nowrap;">
+                            <a name="action_open_enable_banking_config" type="object" class="d-flex align-items-center">Auth expires <field name="enable_banking_valid_until" widget="remaining_days" class="ms-1 me-1"/> <i class="fa fa-cog"/></a>
+                        </div>
+                    </t>
+                    <t t-elif="record.enable_banking_status.raw_value == 'not_connected'">
+                        <div class="text-warning">
+                            <a name="action_open_enable_banking_config" type="object" class="text-warning">Not yet connected <i class="fa fa-cog "/></a>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="text-danger">
+                            <a name="action_open_enable_banking_config" type="object" class="text-danger">Errors in configuration! <i class="fa fa-cog "/></a>
+                        </div>
+                    </t>
+                </t>
+            </xpath>
+
+            <xpath expr="//div[@id='action_card_statements']" position="inside">
+
+                    <a type="action"
+                       t-if="record.bank_statements_source.raw_value == 'enable_banking'"
+                       name="%(account_statements_enable_banking.account_bank_statement_line_action)s"
+                       context="{'search_default_journal_id': id}"
+                       role="menuitem"
+                    >Statement Lines
+                    </a>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

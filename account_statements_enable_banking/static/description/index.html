@@ -1,0 +1,76 @@
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan mb-1" style="color:#875A7B;">Enable Banking</h2>
+        <h3 class="oe_slogan mt-0">Online Bank Statements Synchronization</h3>
+
+        <div class="oe_demo  oe_screenshot mt-3">
+            <img src="configuration.png" alt="Module Overview">
+        </div>
+        <div class=" oe_mt32">
+            <p>
+                Automatically sync your bank statements with Enable Banking API connector. Enable Banking supports <b>over 2500 banks</b> in <b>28 countries</b> in Europe.
+                If you link your own accounts on Enable Banking website, you can use their API <b>FOR FREE</b>.
+                <br>
+                See the full list of supported banks here: https://enablebanking.com/open-banking-apis
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <img class="oe_picture oe_screenshot" src="dashboard.png">
+        </div>
+        <div class="oe_span6">
+            <h2 class="oe_slogan mt-0" style="color:#875A7B; text-align: left;">Clear overview</h2>
+            <p class="oe_mt32 oe_mb32 text-justify">
+            Fetch transactions manually, have a clear overview of your bank connection status and access the Enable Banking configuration right from the journal dashboard.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+
+        <div class="oe_span6">
+            <h2 class="oe_slogan mt-0" style="color:#875A7B; text-align: left;">Simple setup</h2>
+            <p class="oe_mt32">
+                Just insert your Application ID and RSA Private Key, then click 'Connect' to effortlessly establish the connection.
+                It's a quick and easy process, so you can get your bank sync running smoothly in no time.
+            </p>
+        </div>
+        <div class="oe_span6 ">
+            <img class="oe_picture oe_screenshot mt-5" src="configuration2.png"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class=" oe_mt32">
+            <h3 >Setup & Requirements</h3>
+            <p>
+                Ensure you have <b>pyjwt</b> pip package installed before you install the module.
+            </p>
+            <ol>
+                <li>Make sure that the bank that is selected on your Journal has <b>correct name and country</b> as listed here: https://enablebanking.com/open-banking-apis</li>
+                <li>Go to your Journal Dashboard and click <b>Connect</b> on the journal you wish to connect with Enable Banking</li>
+                <li>Copy the <b>Redirect URL</b> that is showed in the Enable Banking Connection Wizard</li>
+                <li>Go to <b>https://enablebanking.com/cp/applications</b> (create your account if you don't have one)</li>
+                <li>On the Enable Banking control panel, <b>create a new production environment</b> (follow the instructions on the page)</li>
+                <li><b>Link your account(s)</b> you wish to connect with Odoo</li>
+                <li>Go back to the Enable Banking connection wizard in your Odoo and <b>fill in Application ID and RSA Key</b></li>
+                <li>Click <b>Connect</b> and follow the instructions</li>
+                <li>Everything is ready!</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_separator">
+</section>
