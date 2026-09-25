@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        name="Admin"
+        id="menu_hr_expense_admin_root"
+        sequence="240"
+        web_icon="base,static/description/settings.png"
+    >
+        <menuitem
+            name="Mail Aliases"
+            id="menu_hr_expense_admin_alias"
+            action="mail.mail_alias_action"
+        />
+        <menuitem
+            name="Users"
+            id="menu_hr_expense_admin_menu_user"
+            action="base.action_res_users"
+        />
+    </menuitem>
+</odoo>

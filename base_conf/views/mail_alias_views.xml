@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mail_alias_view_search" model="ir.ui.view">
+        <field name="name">mail.alias.view.search.inherit.hr.expense.admin</field>
+        <field name="model">mail.alias</field>
+        <field name="inherit_id" ref="mail.mail_alias_view_search"/>
+        <field name="arch" type="xml">
+            <search position="inside">
+                <filter string="Valid" name="valid" domain="[('alias_status', '=', 'valid')]"/>
+            </search>
+        </field>
+    </record>
+    <record id="mail.mail_alias_action" model="ir.actions.act_window">
+        <field name="context">{
+                'search_default_active': True,
+                'search_default_valid': True,
+            }
+        </field>
+    </record>
+</odoo>
