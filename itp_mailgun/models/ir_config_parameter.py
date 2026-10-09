@@ -24,7 +24,7 @@ class IrConfigParameter(models.Model):
         api_key = self.sudo().get_param("itp_mailgun.apikey")
         mail_domain = self.sudo().get_param("mail.catchall.domain")
         if api_key and mail_domain:
-            url = "https://api.mailgun.net/v3/domains/%s/verify" % mail_domain
+            url = "https://api.eu.mailgun.net/v3/domains/%s/verify" % mail_domain
             res = requests.put(url, auth=("api", api_key))
             if (
                 res.status_code == 200

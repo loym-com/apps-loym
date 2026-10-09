@@ -24,3 +24,4 @@
     "demo_summary": "Easy to send outgoing and fetch incoming messages by using Mailgun",
     "demo_images": ["images/mailgun_main.png"],
 }
+# Sikkerhetsmerknad: Denne versjonen validerer signaturen og tidsstempelet, men implementerer ikke lagring av brukte token-verdier. For full beskyttelse mot replay-angrep bør modulen også lagre hver aksepterte token med en unik databasebegrensning. Det bør gjøres før du eksponerer endepunktet som en ferdig produksjonsløsning.
