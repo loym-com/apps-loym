@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="model_x_read_me" model="ir.model">
+        <field name="name">README</field>
+        <field name="model">x_read.me</field>
+    </record>
+</odoo>

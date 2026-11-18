@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="field_x_read_me_x_name" model="ir.model.fields">
+        <field name="name">x_name</field>
+        <field name="field_description">Name</field>
+        <field name="model_id" ref="model_x_read_me" />
+        <field name="ttype">char</field>
+        <field name="required" eval="True" />
+    </record>
+    <record id="field_x_read_me_x_readme" model="ir.model.fields">
+        <field name="name">x_readme</field>
+        <field name="field_description">README</field>
+        <field name="model_id" ref="model_x_read_me" />
+        <field name="ttype">html</field>
+    </record>
+</odoo>
