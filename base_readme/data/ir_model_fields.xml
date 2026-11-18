@@ -13,4 +13,17 @@
         <field name="model_id" ref="model_x_read_me" />
         <field name="ttype">html</field>
     </record>
+    <record id="field_x_read_me_x_company_id" model="ir.model.fields">
+        <field name="name">x_company_id</field>
+        <field name="field_description">Company</field>
+        <field name="model_id" ref="model_x_read_me" />
+        <field name="ttype">many2one</field>
+        <field name="relation">res.company</field>
+    </record>
+    <record id="field_x_read_me_x_active" model="ir.model.fields">
+        <field name="name">x_active</field>
+        <field name="field_description">Active</field>
+        <field name="model_id" ref="model_x_read_me" />
+        <field name="ttype">boolean</field>
+    </record>
 </odoo>
