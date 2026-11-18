@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="default_x_read_me_active" model="ir.default">
+        <field name="field_id" ref="field_x_read_me_x_active" />
+        <field name="json_value">true</field>
+    </record>
+</odoo>

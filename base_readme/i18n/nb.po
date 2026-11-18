@@ -1,0 +1,47 @@
+msgid ""
+msgstr ""
+"Language: nb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: base_readme
+#: model:ir.model.fields,field_description:base_readme.field_x_read_me_x_active
+msgid "Active"
+msgstr "Aktiv"
+
+#. module: base_readme
+#: model_terms:ir.ui.view,arch_db:base_readme.view_x_read_me_search
+msgid "Archived"
+msgstr "Arkivert"
+
+#. module: base_readme
+#: model:ir.model.fields,field_description:base_readme.field_x_read_me_x_company_id
+msgid "Company"
+msgstr "Selskap"
+
+#. module: base_readme
+#: model:ir.model.fields,field_description:base_readme.field_x_read_me_x_name
+msgid "Name"
+msgstr "Tittel"
+
+#. module: base_readme
+#: model:ir.actions.act_window,name:base_readme.action_x_read_me
+#: model:ir.model,name:base_readme.model_x_read_me
+#: model:ir.model.fields,field_description:base_readme.field_x_read_me_x_readme
+#: model:ir.module.module,shortdesc:base.module_base_readme
+#: model:ir.ui.menu,name:base_readme.menu_x_read_me_root
+#: model_terms:ir.ui.view,arch_db:base_readme.view_x_read_me_form
+#: model_terms:ir.ui.view,arch_db:base_readme.view_x_read_me_list
+msgid "README"
+msgstr "Les meg"
+
+#. module: base_readme
+#: model_terms:ir.ui.view,arch_db:base_readme.view_x_read_me_form
+msgid "Title"
+msgstr "Tittel"
+
+#. module: base_readme
+#: model_terms:ir.actions.act_window,help:base_readme.action_x_read_me
+msgid "Write your first README"
+msgstr "Skriv din første Les meg-side"
