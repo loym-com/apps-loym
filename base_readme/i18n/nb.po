@@ -18,12 +18,12 @@ msgstr "Arkivert"
 #. module: base_readme
 #: model:ir.model.fields,field_description:base_readme.field_x_read_me_x_company_id
 msgid "Company"
-msgstr "Selskap"
+msgstr "Firma"
 
 #. module: base_readme
 #: model:ir.model.fields,field_description:base_readme.field_x_read_me_x_name
 msgid "Name"
-msgstr "Tittel"
+msgstr "Navn"
 
 #. module: base_readme
 #: model:ir.actions.act_window,name:base_readme.action_x_read_me
@@ -34,7 +34,7 @@ msgstr "Tittel"
 #: model_terms:ir.ui.view,arch_db:base_readme.view_x_read_me_form
 #: model_terms:ir.ui.view,arch_db:base_readme.view_x_read_me_list
 msgid "README"
-msgstr "Les meg"
+msgstr "LES MEG"
 
 #. module: base_readme
 #: model_terms:ir.ui.view,arch_db:base_readme.view_x_read_me_form
@@ -44,4 +44,4 @@ msgstr "Tittel"
 #. module: base_readme
 #: model_terms:ir.actions.act_window,help:base_readme.action_x_read_me
 msgid "Write your first README"
-msgstr "Skriv din første Les meg-side"
+msgstr "Skriv din første LES MEG-side"
