@@ -44,6 +44,11 @@ msgid "Post"
 msgstr "Bokfør"
 
 #. module: account_offering
+#: model_terms:ir.ui.view,arch_db:account_offering.view_account_move_form_offering
+msgid "Debit/Credit"
+msgstr "Debet/Kredit"
+
+#. module: account_offering
 #: model:ir.actions.server,name:account_offering.action_offering_post
 msgid "Post offering"
 msgstr "Bokfør kollekt"

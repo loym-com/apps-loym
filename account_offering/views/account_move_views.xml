@@ -42,9 +42,9 @@
                             <field name="account_id"
                                    domain="[('tag_ids', 'in', [%(account_tag_offering)d])]"
                                    options="{'no_create': True}"/>
-                            <!-- <field name="amount_currency" sum="Total"/> -->
-                            <field name="debit" sum="Total"/>
-                            <field name="credit" sum="Total"/>
+                            <field name="amount_currency" sum="Total">Debit/Credit</field>
+                            <!-- <field name="debit" sum="Total"/> -->
+                            <!-- <field name="credit" sum="Total"/> -->
                         </list>
                     </field>
                 </sheet>
