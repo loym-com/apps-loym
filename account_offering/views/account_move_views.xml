@@ -34,14 +34,16 @@
                             class="btn-primary"
                             invisible="not attachment_ids"
                     />
-                    <widget name="attach_document"
-                            string="Upload Attachment"
-                            highlight="1"
-                            invisible="attachment_ids"
-                    />
                 </header>
                 <sheet>
                     <field name="state" invisible="1"/>
+                    <group>
+                        <widget name="attach_document"
+                                string="Upload Attachment"
+                                highlight="1"
+                                invisible="attachment_ids"
+                        />
+                    </group>
                     <group>
                         <field name="date"/>
                         <field name="ref"/>
