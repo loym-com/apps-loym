@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="error_missing_default_accounts">Configure at least one debit account and one credit account with the Default offering tag.</template>
+
+    <record id="action_account_offering" model="ir.actions.server">
+        <field name="name">Offering</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="state">code</field>
+        <field name="code"><![CDATA[
+label = env.ref('account_offering.menu_account_offering').name
+tag = env.ref('account_offering.account_tag_default_offering')
+accounts = env['account.account'].search([('tag_ids', 'in', tag.ids)])
+debit_accounts = [account for account in accounts if account.internal_group in ('asset', 'expense')]
+credit_accounts = [account for account in accounts if account.internal_group not in ('asset', 'expense')]
+if not debit_accounts or not credit_accounts:
+    raise UserError(str(env['ir.qweb']._render('account_offering.error_missing_default_accounts')).strip())
+
+debit_extra = max(0, len(credit_accounts) - len(debit_accounts))
+credit_extra = max(0, len(debit_accounts) - len(credit_accounts))
+today = datetime.datetime.now(timezone(env.user.tz or 'UTC')).date()
+move = env['account.move'].create({
+    'move_type': 'entry',
+    'ref': label,
+    'date': today,
+    'line_ids': [
+        Command.create({
+            'account_id': account.id,
+            'debit': 1.0 + debit_extra if account == debit_accounts[-1] else 1.0,
+        })
+        for account in debit_accounts
+    ] + [
+        Command.create({
+            'account_id': account.id,
+            'credit': 1.0 + credit_extra if account == credit_accounts[-1] else 1.0,
+        })
+        for account in credit_accounts
+    ],
+})
+
+]]></field>
+    </record>
+
+</odoo>
+<!-- action = {
+    'type': 'ir.actions.act_window',
+    'name': label,
+    'res_model': 'account.move',
+    'res_id': move.id,
+    'view_mode': 'list,form',
+    'views': [
+        [env.ref('account_offering.view_account_move_list_offering').id, 'list'],
+        [env.ref('account_offering.view_account_move_form_offering').id, 'form'],
+        
+    ],
+    'target': 'current',
+} -->

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_account_move_list_offering" model="ir.ui.view">
+        <field name="name">account.move.list.offering</field>
+        <field name="model">account.move</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <list string="Offering" create="0">
+                <header>
+                    <button name="%(account_offering.action_account_offering)d"
+                            type="action" string="New"
+                            class="btn-primary" display="always"/>
+                </header>
+                <field name="date"/>
+                <field name="ref"/>
+                <field name="amount_total_in_currency_signed"/>
+                <field name="currency_id" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_account_move_form_offering" model="ir.ui.view">
+        <field name="name">account.move.form.offering</field>
+        <field name="model">account.move</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <form string="Offering">
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <field name="ref"/>
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="company_currency_id" column_invisible="True"/>
+                            <field name="account_id"
+                                   domain="[('tag_ids', 'in', [%(account_tag_offering)d])]"
+                                   options="{'no_create': True}"/>
+                            <!-- <field name="amount_currency" sum="Total"/> -->
+                            <field name="debit" sum="Total"/>
+                            <field name="credit" sum="Total"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

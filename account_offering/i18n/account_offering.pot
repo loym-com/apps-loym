@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_offering
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_offering
+#: model_terms:ir.ui.view,arch_db:account_offering.error_missing_default_accounts
+msgid "Configure at least one debit account and one credit account with the Default offering tag."
+msgstr ""
+
+#. module: account_offering
+#: model:account.account.tag,name:account_offering.account_tag_default_offering
+msgid "Default offering"
+msgstr ""
+
+#. module: account_offering
+#: model_terms:ir.ui.view,arch_db:account_offering.view_account_move_list_offering
+msgid "New"
+msgstr ""
+
+#. module: account_offering
+#: model:account.account.tag,name:account_offering.account_tag_offering
+#: model:ir.actions.server,name:account_offering.action_account_offering
+#: model:ir.actions.act_window,name:account_offering.action_offering_moves
+#: model:ir.ui.menu,name:account_offering.menu_account_offering
+#: model_terms:ir.ui.view,arch_db:account_offering.view_account_move_form_offering
+#: model_terms:ir.ui.view,arch_db:account_offering.view_account_move_list_offering
+#: model:ir.module.module,shortdesc:base.module_account_offering
+msgid "Offering"
+msgstr ""
+
+#. module: account_offering
+#: model:ir.module.module,summary:base.module_account_offering
+msgid "Register offering journal entries"
+msgstr ""
+
+#. module: account_offering
+#: model_terms:ir.ui.view,arch_db:account_offering.view_account_move_form_offering
+msgid "Total"
+msgstr ""

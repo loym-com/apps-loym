@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="action_offering_moves" model="ir.actions.act_window">
+        <field name="name">Offering</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="action_offering_moves_list" model="ir.actions.act_window.view">
+        <field name="sequence">1</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_account_move_list_offering"/>
+        <field name="act_window_id" ref="action_offering_moves"/>
+    </record>
+    <record id="action_offering_moves_form" model="ir.actions.act_window.view">
+        <field name="sequence">2</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_account_move_form_offering"/>
+        <field name="act_window_id" ref="action_offering_moves"/>
+    </record>
+
+    <menuitem id="menu_account_offering"
+              name="Offering"
+              action="action_offering_moves"
+              web_icon="account,static/description/icon.png"
+              groups="account.group_account_user"
+              sequence="205"/>
+
+</odoo>
