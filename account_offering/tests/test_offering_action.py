@@ -28,6 +28,8 @@ class FakeEnv:
             return SimpleNamespace(name="Offering")
         if xmlid.endswith("view_account_move_list_offering"):
             return SimpleNamespace(id=43)
+        if xmlid.endswith("view_account_move_form_offering"):
+            return SimpleNamespace(id=44)
         if xmlid == "account_offering.journal_offering":
             return SimpleNamespace(id=55)
         return SimpleNamespace(id=42, ids=[42])
@@ -67,6 +69,33 @@ class OfferingActionTest(unittest.TestCase):
             "UserError": UserError,
         }
         exec(compile(code, str(ACTION_FILE), "exec"), context)
+        return context.get("action")
+
+    def test_new_opens_created_entry_without_clearing_breadcrumbs(self):
+        env = FakeEnv(["asset", "income"])
+        action = self.run_action(env)
+        self.assertEqual(action, {
+            "type": "ir.actions.act_window",
+            "name": "Offering",
+            "res_model": "account.move",
+            "views": [[44, "form"]],
+            "res_id": 123,
+            "target": "current",
+        })
+
+    def test_both_views_use_the_server_action_for_new(self):
+        views_file = ACTION_FILE.parents[1] / "views/account_move_views.xml"
+        tree = ElementTree.parse(views_file)
+        for view_type in ("list", "form"):
+            with self.subTest(view_type=view_type):
+                view = tree.find(
+                    f".//record[@id='view_account_move_{view_type}_offering']"
+                    f"/field[@name='arch']/{view_type}"
+                )
+                self.assertEqual(view.get("create"), "0")
+                button = view.find("./header/button[@string='New']")
+                self.assertEqual(button.get("type"), "action")
+                self.assertEqual(button.get("name"), "%(account_offering.action_account_offering)d")
 
     def test_balanced_entries_with_equal_and_unequal_account_counts(self):
         for account_types in (

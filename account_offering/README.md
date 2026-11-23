@@ -9,7 +9,8 @@ eller kostnadskonto) og én standard kreditkonto er påkrevd.
 Modulen oppretter diversejournalen **Kollekt** i selskapet som installerer
 modulen. Menyen Kollekt viser bare bilag i denne journalen. Eksisterende bilag
 flyttes ikke automatisk til journalen.
-Knappen **Ny** oppretter et balansert bilagsutkast. Hver standardkonto får
+Knappen **Ny** i listen og skjemaet oppretter et balansert bilagsutkast og
+åpner det i skjemaet. Hver standardkonto får
 først 1 på sin side; hvis den ene siden har færre kontoer, legges differansen
 til den siste kontoen på den siden. Juster beløpene før bilaget bokføres.
 
@@ -27,7 +28,8 @@ both **Offering** and **Default offering**. At least one default debit account
 The module creates the **Offering** miscellaneous journal in the company that
 installs it. The Offering menu shows only entries in this journal. Existing
 entries are not moved to the journal automatically.
-The **New** button creates a balanced draft journal entry. Each default account
+The **New** button in the list and form creates a balanced draft journal entry
+and opens it in the form. Each default account
 starts with 1 on its side; if there are fewer accounts on one side, the
 difference is added to the last account on that side. Adjust the amounts before
 posting the entry.

@@ -25,7 +25,11 @@
         <field name="model">account.move</field>
         <field name="priority">1000</field>
         <field name="arch" type="xml">
-            <form string="Offering">
+            <form string="Offering" create="0">
+                <header>
+                    <button name="%(account_offering.action_account_offering)d"
+                            type="action" string="New" class="btn-primary"/>
+                </header>
                 <sheet>
                     <field name="state" invisible="1"/>
                     <group>

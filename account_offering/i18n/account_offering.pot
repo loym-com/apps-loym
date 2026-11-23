@@ -22,6 +22,7 @@ msgid "Default offering"
 msgstr ""
 
 #. module: account_offering
+#: model_terms:ir.ui.view,arch_db:account_offering.view_account_move_form_offering
 #: model_terms:ir.ui.view,arch_db:account_offering.view_account_move_list_offering
 msgid "New"
 msgstr ""

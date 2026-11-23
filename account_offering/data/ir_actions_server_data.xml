@@ -40,6 +40,14 @@ move = env['account.move'].create({
     ],
 })
 
+action = {
+    'type': 'ir.actions.act_window',
+    'name': label,
+    'res_model': 'account.move',
+    'views': [[env.ref('account_offering.view_account_move_form_offering').id, 'form']],
+    'res_id': move.id,
+    'target': 'current',
+}
 ]]></field>
     </record>
 

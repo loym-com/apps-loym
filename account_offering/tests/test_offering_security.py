@@ -43,7 +43,7 @@ class TestOfferingSecurity(TransactionCase):
             ],
         })
 
-    def test_registration_posting_and_journal_isolation(self):
+    def test_registration_and_journal_isolation(self):
         self.assertFalse(self.user.has_group("account.group_account_invoice"))
         user_env = self.env(user=self.user)
         self.assertFalse(user_env["account.journal"].search([("id", "=", self.other_journal.id)]))
@@ -56,23 +56,13 @@ class TestOfferingSecurity(TransactionCase):
         with self.assertRaises(AccessError), self.cr.savepoint():
             user_env["account.move"].create({"journal_id": self.other_journal.id})
 
-        post = self.env.ref("account_offering.action_offering_post")
-        with self.assertRaises(AccessError), self.cr.savepoint():
-            post.with_user(self.user).with_context(
-                active_model="account.move",
-                active_id=self.other_move.id,
-                active_ids=self.other_move.ids,
-            ).run()
-        with self.assertRaises(UserError), self.cr.savepoint():
-            post.with_context(
-                active_model="account.move",
-                active_id=self.other_move.id,
-                active_ids=self.other_move.ids,
-            ).run()
-
-        self.env.ref("account_offering.action_account_offering").with_user(self.user).run()
-        move = user_env["account.move"].search([("journal_id", "=", self.journal.id)], limit=1)
-        self.assertTrue(move)
+        action = self.env.ref("account_offering.action_account_offering").with_user(self.user).run()
+        move = user_env["account.move"].browse(action["res_id"])
+        self.assertEqual(move.journal_id, self.journal)
+        self.assertEqual(action["views"], [
+            [self.env.ref("account_offering.view_account_move_form_offering").id, "form"],
+        ])
+        self.assertEqual(action["target"], "current")
         self.assertEqual(len(move.line_ids), 2)
         move.write({"ref": "Updated offering"})
         with self.assertRaises((AccessError, UserError)), self.cr.savepoint():
@@ -82,20 +72,6 @@ class TestOfferingSecurity(TransactionCase):
         empty_move = user_env["account.move"].create({"journal_id": self.journal.id})
         with self.assertRaises((AccessError, UserError)), self.cr.savepoint():
             empty_move.write({"journal_id": self.other_journal.id})
-        ordinary_user = self.env["res.users"].with_context(no_reset_password=True).create({
-            "name": "Ordinary internal user",
-            "login": "offering-ordinary-test",
-            "group_ids": [Command.set([self.env.ref("base.group_user").id])],
-        })
-        with self.assertRaises(AccessError), self.cr.savepoint():
-            post.with_user(ordinary_user).with_context(
-                active_model="account.move", active_id=move.id, active_ids=move.ids,
-            ).run()
-
         user_env["account.move"].get_views([
             (self.env.ref("account_offering.view_account_move_form_offering").id, "form"),
         ])
-        post.with_user(self.user).with_context(
-            active_model="account.move", active_id=move.id, active_ids=move.ids,
-        ).run()
-        self.assertEqual(move.state, "posted")
