@@ -43,6 +43,18 @@ class TestOfferingSecurity(TransactionCase):
             ],
         })
 
+    def test_account_and_tag_read_access(self):
+        self.env.ref("account.access_account_account_user").active = False
+        self.env.ref("account.access_account_tag_internal_user").active = False
+        accounts = self.accounts.with_user(self.user)
+        tag = self.env.ref("account_offering.account_tag_offering").with_user(self.user)
+        self.assertEqual(len(accounts.read(["name", "tag_ids"])), 2)
+        self.assertEqual(tag.read(["name"])[0]["name"], "Offering")
+        with self.assertRaises(AccessError), self.cr.savepoint():
+            accounts[0].write({"name": "Changed account"})
+        with self.assertRaises(AccessError), self.cr.savepoint():
+            tag.write({"name": "Changed tag"})
+
     def test_registration_and_journal_isolation(self):
         self.assertFalse(self.user.has_group("account.group_account_invoice"))
         user_env = self.env(user=self.user)

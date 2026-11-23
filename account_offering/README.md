@@ -16,7 +16,8 @@ til den siste kontoen på den siden. Juster beløpene før bilaget bokføres.
 
 Gi en intern bruker rollen **Kollektbruker** under **Kollekt** for å registrere
 og bokføre kollekt. Rollen gir tilgang til kollektjournalen, dens bilag og
-bilagslinjer. Ikke gi brukeren andre regnskapsroller hvis tilgangen skal være
+bilagslinjer, samt lesetilgang til kontoer og kontotagger. Ikke gi brukeren
+andre regnskapsroller hvis tilgangen skal være
 begrenset til denne journalen; andre roller kan gi bredere tilgang.
 
 ## English
@@ -36,5 +37,6 @@ posting the entry.
 
 Assign an internal user the **Offering user** role under **Offering** to
 register and post offerings. The role grants access to the offering journal,
-its entries and their lines. Do not assign other accounting roles if access
+its entries and their lines, and read access to accounts and account tags.
+Do not assign other accounting roles if access
 must be limited to this journal; other roles may grant broader access.

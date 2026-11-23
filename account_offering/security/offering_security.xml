@@ -11,11 +11,23 @@
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
     </record>
 
+    <record id="access_offering_account" model="ir.access">
+        <field name="name">Offering accounts</field>
+        <field name="model_id" ref="account.model_account_account"/>
+        <field name="group_id" ref="group_offering_user"/>
+        <field name="operation">r</field>
+    </record>
+    <record id="access_offering_account_tag" model="ir.access">
+        <field name="name">Offering account tags</field>
+        <field name="model_id" ref="account.model_account_account_tag"/>
+        <field name="group_id" ref="group_offering_user"/>
+        <field name="operation">r</field>
+    </record>
     <record id="access_offering_move" model="ir.access">
         <field name="name">Offering journal entries</field>
         <field name="model_id" ref="account.model_account_move"/>
         <field name="group_id" ref="group_offering_user"/>
-        <field name="operation">cru</field>
+        <field name="operation">crud</field>
         <field name="domain" eval="str([('journal_id', '=', ref('journal_offering'))])"/>
     </record>
     <record id="access_offering_move_line" model="ir.access">
