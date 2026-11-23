@@ -27,9 +27,18 @@
         <field name="arch" type="xml">
             <form string="Offering" create="0">
                 <header>
+                    <field name="attachment_ids" invisible="1"/>
                     <button name="%(account_offering.action_account_offering)d"
-                            type="action" string="New" class="btn-primary"/>
-                    <widget name="attach_document" string="Upload Attachment"/>
+                            type="action"
+                            string="New"
+                            class="btn-primary"
+                            invisible="not attachment_ids"
+                    />
+                    <widget name="attach_document"
+                            string="Upload Attachment"
+                            highlight="1"
+                            invisible="attachment_ids"
+                    />
                 </header>
                 <sheet>
                     <field name="state" invisible="1"/>
