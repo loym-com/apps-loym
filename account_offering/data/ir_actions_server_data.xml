@@ -2,6 +2,8 @@
 <odoo>
 
     <template id="error_missing_default_accounts">Configure at least one debit account and one credit account with the Default offering tag.</template>
+    <template id="error_select_offering">Select an offering entry to post.</template>
+    <template id="error_wrong_journal">Only offering journal entries can be posted here.</template>
 
     <record id="action_account_offering" model="ir.actions.server">
         <field name="name">Offering</field>
@@ -42,16 +44,3 @@ move = env['account.move'].create({
     </record>
 
 </odoo>
-<!-- action = {
-    'type': 'ir.actions.act_window',
-    'name': label,
-    'res_model': 'account.move',
-    'res_id': move.id,
-    'view_mode': 'list,form',
-    'views': [
-        [env.ref('account_offering.view_account_move_list_offering').id, 'list'],
-        [env.ref('account_offering.view_account_move_form_offering').id, 'form'],
-        
-    ],
-    'target': 'current',
-} -->

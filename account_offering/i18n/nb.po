@@ -28,8 +28,34 @@ msgid "New"
 msgstr "Ny"
 
 #. module: account_offering
+#: model:res.groups,name:account_offering.group_offering_user
+msgid "Offering user"
+msgstr "Kollektbruker"
+
+#. module: account_offering
+#: model_terms:ir.ui.view,arch_db:account_offering.error_wrong_journal
+msgid "Only offering journal entries can be posted here."
+msgstr "Bare bilag i kollektjournalen kan bokføres her."
+
+#. module: account_offering
+#: model_terms:ir.ui.view,arch_db:account_offering.view_account_move_form_offering
+msgid "Post"
+msgstr "Bokfør"
+
+#. module: account_offering
+#: model:ir.actions.server,name:account_offering.action_offering_post
+msgid "Post offering"
+msgstr "Bokfør kollekt"
+
+#. module: account_offering
+#: model_terms:ir.ui.view,arch_db:account_offering.error_select_offering
+msgid "Select an offering entry to post."
+msgstr "Velg et kollektbilag som skal bokføres."
+
+#. module: account_offering
 #: model:account.account.tag,name:account_offering.account_tag_offering
 #: model:account.journal,name:account_offering.journal_offering
+#: model:res.groups.privilege,name:account_offering.privilege_offering
 #: model:ir.actions.server,name:account_offering.action_account_offering
 #: model:ir.actions.act_window,name:account_offering.action_offering_moves
 #: model:ir.ui.menu,name:account_offering.menu_account_offering

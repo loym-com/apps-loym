@@ -13,6 +13,11 @@ Knappen **Ny** oppretter et balansert bilagsutkast. Hver standardkonto får
 først 1 på sin side; hvis den ene siden har færre kontoer, legges differansen
 til den siste kontoen på den siden. Juster beløpene før bilaget bokføres.
 
+Gi en intern bruker rollen **Kollektbruker** under **Kollekt** for å registrere
+og bokføre kollekt. Rollen gir tilgang til kollektjournalen, dens bilag og
+bilagslinjer. Ikke gi brukeren andre regnskapsroller hvis tilgangen skal være
+begrenset til denne journalen; andre roller kan gi bredere tilgang.
+
 ## English
 
 Mark available accounts with the **Offering** tag and default accounts with
@@ -26,3 +31,8 @@ The **New** button creates a balanced draft journal entry. Each default account
 starts with 1 on its side; if there are fewer accounts on one side, the
 difference is added to the last account on that side. Adjust the amounts before
 posting the entry.
+
+Assign an internal user the **Offering user** role under **Offering** to
+register and post offerings. The role grants access to the offering journal,
+its entries and their lines. Do not assign other accounting roles if access
+must be limited to this journal; other roles may grant broader access.

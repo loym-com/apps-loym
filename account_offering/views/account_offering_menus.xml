@@ -24,7 +24,7 @@
               name="Offering"
               action="action_offering_moves"
               web_icon="account,static/description/icon.png"
-              groups="account.group_account_user"
+              groups="account.group_account_user,account_offering.group_offering_user"
               sequence="205"/>
 
 </odoo>
