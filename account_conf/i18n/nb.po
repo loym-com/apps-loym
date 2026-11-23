@@ -2,3 +2,8 @@
 #: model:ir.model,name:account.model_account_journal
 msgid "Journal"
 msgstr "Journal"
+
+#. module: account_conf
+#: model:ir.ui.menu,name:account.menu_finance
+msgid "Accounting"
+msgstr "Regnskap"

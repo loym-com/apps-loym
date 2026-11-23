@@ -5,4 +5,7 @@
     "depends": [
         "account",
     ],
+    "data": [
+        "data/ir_ui_menu.xml",
+    ],
 }
