@@ -97,6 +97,16 @@ class OfferingActionTest(unittest.TestCase):
                 self.assertEqual(button.get("type"), "action")
                 self.assertEqual(button.get("name"), "%(account_offering.action_account_offering)d")
 
+    def test_form_has_an_attachment_upload_button(self):
+        views_file = ACTION_FILE.parents[1] / "views/account_move_views.xml"
+        tree = ElementTree.parse(views_file)
+        widget = tree.find(
+            ".//record[@id='view_account_move_form_offering']"
+            "/field[@name='arch']/form/header/widget[@name='attach_document']"
+        )
+        self.assertIsNotNone(widget)
+        self.assertEqual(widget.get("string"), "Upload Attachment")
+
     def test_balanced_entries_with_equal_and_unequal_account_counts(self):
         for account_types in (
             ["asset", "income"],

@@ -80,3 +80,8 @@ msgstr "Registrer kollektbilag"
 #: model_terms:ir.ui.view,arch_db:account_offering.view_account_move_form_offering
 msgid "Total"
 msgstr "Sum"
+
+#. module: account_offering
+#: model_terms:ir.ui.view,arch_db:account_offering.view_account_move_form_offering
+msgid "Upload Attachment"
+msgstr "Last opp vedlegg"

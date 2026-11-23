@@ -29,6 +29,7 @@
                 <header>
                     <button name="%(account_offering.action_account_offering)d"
                             type="action" string="New" class="btn-primary"/>
+                    <widget name="attach_document" string="Upload Attachment"/>
                 </header>
                 <sheet>
                     <field name="state" invisible="1"/>
@@ -43,11 +44,10 @@
                                    domain="[('tag_ids', 'in', [%(account_tag_offering)d])]"
                                    options="{'no_create': True}"/>
                             <field name="amount_currency" sum="Total" string="Debit/Credit"/>
-                            <!-- <field name="debit" sum="Total"/> -->
-                            <!-- <field name="credit" sum="Total"/> -->
                         </list>
                     </field>
                 </sheet>
+                <chatter reload_on_attachment="True"/>
             </form>
         </field>
     </record>
