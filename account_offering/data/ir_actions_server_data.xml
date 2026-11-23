@@ -20,7 +20,7 @@ debit_extra = max(0, len(credit_accounts) - len(debit_accounts))
 credit_extra = max(0, len(debit_accounts) - len(credit_accounts))
 today = datetime.datetime.now(timezone(env.user.tz or 'UTC')).date()
 move = env['account.move'].create({
-    'move_type': 'entry',
+    'journal_id': env.ref('account_offering.journal_offering').id,
     'ref': label,
     'date': today,
     'line_ids': [

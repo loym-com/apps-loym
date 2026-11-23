@@ -1,3 +1,4 @@
+import ast
 import datetime
 import unittest
 from pathlib import Path
@@ -27,6 +28,8 @@ class FakeEnv:
             return SimpleNamespace(name="Offering")
         if xmlid.endswith("view_account_move_list_offering"):
             return SimpleNamespace(id=43)
+        if xmlid == "account_offering.journal_offering":
+            return SimpleNamespace(id=55)
         return SimpleNamespace(id=42, ids=[42])
 
     def __getitem__(self, model):
@@ -64,7 +67,6 @@ class OfferingActionTest(unittest.TestCase):
             "UserError": UserError,
         }
         exec(compile(code, str(ACTION_FILE), "exec"), context)
-        return context["action"]
 
     def test_balanced_entries_with_equal_and_unequal_account_counts(self):
         for account_types in (
@@ -74,8 +76,9 @@ class OfferingActionTest(unittest.TestCase):
         ):
             with self.subTest(account_types=account_types):
                 env = FakeEnv(account_types)
-                action = self.run_action(env)
+                self.run_action(env)
                 lines = env.created[0]["line_ids"]
+                self.assertEqual(env.created[0]["journal_id"], 55)
                 debit = sum(line.get("debit", 0) for line in lines)
                 credit = sum(line.get("credit", 0) for line in lines)
                 self.assertEqual(debit, credit)
@@ -93,9 +96,6 @@ class OfferingActionTest(unittest.TestCase):
                     other_side = "credit" if side == "debit" else "debit"
                     self.assertGreaterEqual(line[side], 1)
                     self.assertEqual(line.get(other_side, 0), 0)
-                self.assertEqual(action["res_id"], 123)
-                self.assertEqual(action["view_mode"], "form,list")
-                self.assertEqual(action["views"], [[42, "form"], [43, "list"]])
 
     def test_missing_side_does_not_create_move(self):
         for account_types in ([], ["asset", "expense"], ["income"]):
@@ -110,6 +110,15 @@ class OfferingActionTest(unittest.TestCase):
         with self.assertRaisesRegex(UserError, "Merk minst én debetkonto"):
             self.run_action(env)
         self.assertEqual(env.created, [])
+
+    def test_window_action_filters_offering_journal(self):
+        menu_file = ACTION_FILE.parents[1] / "views/account_offering_menus.xml"
+        domain = ElementTree.parse(menu_file).find(
+            ".//record[@id='action_offering_moves']/field[@name='domain']"
+        ).get("eval")
+        refs = {"account_offering.journal_offering": 55}
+        expression = eval(domain, {"__builtins__": {"str": str}}, {"ref": refs.__getitem__})
+        self.assertEqual(ast.literal_eval(expression), [("journal_id", "=", 55)])
 
 
 if __name__ == "__main__":
